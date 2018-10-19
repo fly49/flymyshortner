@@ -3,5 +3,5 @@ en:
     invalid: "Your link is invalid"
   helpers:
     submit:
-      data:
-        submit: "SHORTEN"
+      link:
+        create: "SHORTEN"
