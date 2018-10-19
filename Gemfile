@@ -15,7 +15,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'redis'
 gem 'redis-rails'
-gem 'sidekiq'
 
 gem 'bootstrap-sass'
 gem 'jquery-rails'
