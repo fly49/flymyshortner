@@ -1,19 +1,26 @@
 # frozen_string_literal: true
 
 class LinksController < ApplicationController
-  def index; end
+  def new
+    @link = Link.new
+  end
 
   def show
     redirect_to Link.get(params[:short_url])
   end
 
   def create
-    url = params[:data][:address]
-    unless url_valid?(url)
-      flash.now[:danger] = I18n.t('link.invalid')
-      render 'index' and return
+    @link = Link.new
+    @link.url = permitted_params.fetch(:url)
+    if @link.valid?
+      @link.save
+      render 'new'
+    else
+      render 'new' and return
     end
-    @link = request.host + '/' + Link.shorten(url)
-    render 'index'
+  end
+  
+  def permitted_params
+    params.require(:link).permit(:url)
   end
 end

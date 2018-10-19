@@ -1,22 +1,34 @@
 # frozen_string_literal: true
 
 class Link
-  class << self
-    def shorten(long_link)
-      url = shorten_link
-      Redis.current.set(url, long_link)
-      url
-    end
+  SHORT_LINK_LETTERS = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten.freeze
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
 
-    def get(shorten_link)
-      Redis.current.get(shorten_link)
-    end
+  attr_accessor :url
+  attr_reader :path_key
 
-    private
+  validates :url, presence: true, url: true
+  
+  def self.get(shorten_link)
+    Redis.current.get(shorten_link)
+  end
+  
+  def initialize
+    @path_key = shorten_path
+  end
+  
+  def save
+    Redis.current.set(@path_key, @url)
+  end
+  
+  def persisted?
+    Redis.current.exists(@path_key)
+  end
 
-    def shorten_link
-      letters = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-      (0...8).map { letters[rand(letters.length)] }.join
-    end
+  private
+
+  def shorten_path
+    (0...8).map { SHORT_LINK_LETTERS[rand(SHORT_LINK_LETTERS.length)] }.join
   end
 end

@@ -1,0 +1,7 @@
+<%= simple_form_for @link do |f| %>
+  <%= f.input :url, label: false, input_html: { maxlength: 200, id: 'address' } %>
+  <%= f.button :submit, class: 'btn btn-primary btn-space' %>
+<% end %>
+<% if @link.url %>
+  <% link_to represent_link(@link), id: 'shortened_link' %>
+<% end %>
