@@ -3,10 +3,8 @@
 class Link
   SHORT_LINK_LETTERS = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten.freeze
   include ActiveModel::Validations
-  include ActiveModel::Conversion
 
   attr_accessor :url
-  attr_reader :path_key
 
   validates :url, presence: true, url: true
   
@@ -14,22 +12,29 @@ class Link
     Redis.current.get(shorten_link)
   end
   
-  def initialize
-    @path_key = shorten_path
-  end
-  
   def save
-    persisted? ? Link.get(@path_key) : Redis.current.set(@path_key, @url)
-    return self
+    loop do
+      @path_key = generate_key
+      unless Redis.current.exists(@path_key)
+        Redis.current.set(@path_key, @url)
+        break
+      end
+    end
+    self
   end
   
   def persisted?
     Redis.current.exists(@path_key)
   end
+  
+  def to_key
+    return nil unless @path_key
+    [@path_key]
+  end
 
   private
 
-  def shorten_path
-    (0...8).map { SHORT_LINK_LETTERS[rand(SHORT_LINK_LETTERS.length)] }.join
+  def generate_key
+    SHORT_LINK_LETTERS.sample(8).join
   end
 end

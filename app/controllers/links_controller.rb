@@ -12,8 +12,13 @@ class LinksController < ApplicationController
   def create
     @link = Link.new
     @link.url = permitted_params.fetch(:url)
-    session[:path_key] = @link.save.path_key if @link.valid?
-    render 'index'
+    if @link.valid?
+      @link.save
+      session[:path_key] = @link.to_key.first
+    else
+      flash[:danger] = I18n.t('link.invalid')
+    end
+    redirect_to root_path
   end
   
   def permitted_params

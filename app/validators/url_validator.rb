@@ -1,5 +1,5 @@
 class UrlValidator < ActiveModel::EachValidator
-  URL_REGEX = /\A#{URI.regexp(%w[http https])}\z/
+  URL_REGEX = /\A#{URI::regexp}\z/
   
   def validate_each(record, attribute, value)
     record.errors.add attribute, (options[:message] || I18n.t('link.invalid')) unless
