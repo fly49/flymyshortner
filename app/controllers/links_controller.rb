@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LinksController < ApplicationController
-  def new
+  def index
     @link = Link.new
   end
 
@@ -12,12 +12,8 @@ class LinksController < ApplicationController
   def create
     @link = Link.new
     @link.url = permitted_params.fetch(:url)
-    if @link.valid?
-      @link.save
-      render 'new'
-    else
-      render 'new' and return
-    end
+    session[:path_key] = @link.save.path_key if @link.valid?
+    render 'index'
   end
   
   def permitted_params

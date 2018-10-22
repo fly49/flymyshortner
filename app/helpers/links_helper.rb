@@ -1,5 +1,5 @@
 module LinksHelper
-  def represent_link(link)
-    request.host + '/' + link.path_key
+  def represent_link(path_key)
+    request.protocol + request.host + '/' + path_key
   end
 end

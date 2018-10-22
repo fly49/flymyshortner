@@ -19,7 +19,8 @@ class Link
   end
   
   def save
-    Redis.current.set(@path_key, @url)
+    persisted? ? Link.get(@path_key) : Redis.current.set(@path_key, @url)
+    return self
   end
   
   def persisted?
