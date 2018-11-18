@@ -1,0 +1,23 @@
+<% if path_key %>
+  <% original_link = Link.get(path_key) %>
+  <div class="card">
+    <div class="card-body">
+      
+      <h4 class="card-title">
+        <%= link_to Link.get_title(original_link), original_link, { class: 'link_title' } %> 
+      </h5>
+      
+      <h5 class="card-subtitle mb-2 text-muted">
+        <%= link_to nil, original_link, { class: 'original_link' } %>
+      </h6>
+      
+      <div class="card-text">
+        <p>
+          <%= link_to nil, represent_link(path_key), { class: 'short_link', id: 'short_link' } %>
+          <%= text_field_tag 'copy-text', represent_link(path_key), class: "copy-input" %>
+          <button data-clipboard-action="copy" data-clipboard-target="#copy-text" type="button" class="btn btn-sm"><%= I18n.t('copy-btn') %></button>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
