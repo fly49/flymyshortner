@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LinksController < ApplicationController
   def index
     @link = Link.new
@@ -14,12 +12,20 @@ class LinksController < ApplicationController
     @link.url = permitted_params.fetch(:url)
     if @link.valid?
       @link.save
-      session[:path_key] = @link.to_key.first
+      @path_key = @link.to_key.first
+      cookies[:path_keys] = "" if cookies[:path_keys].nil?
+      cookies[:path_keys] = cookies[:path_keys] + "#{@path_key},"
     else
       flash[:danger] = I18n.t('link.invalid')
     end
-    redirect_to root_path
+    
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js
+    end
   end
+  
+  private
   
   def permitted_params
     params.require(:link).permit(:url)
