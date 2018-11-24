@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'httparty'
 
 class Link
   SHORT_LINK_LETTERS = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten.freeze
@@ -10,6 +11,14 @@ class Link
   
   def self.get(shorten_link)
     Redis.current.get(shorten_link)
+  end
+  
+  def self.get_title(url)
+    content_type = HTTParty.head(url).headers['content-type']
+    return unless content_type.include? 'text/html'
+    page_conent = HTTParty.get(url).body
+    title = page_conent.scan(/<title>\s*(.+)<\/title>$/).flatten.first
+    CGI::unescapeHTML(title) if title
   end
   
   def save
@@ -31,7 +40,7 @@ class Link
     return nil unless @path_key
     [@path_key]
   end
-
+  
   private
 
   def generate_key

@@ -1,7 +1,13 @@
-<%= simple_form_for @link, url: links_path do |f| %>
-  <%= f.input :url, label: false, input_html: { maxlength: 200, id: 'address' } %>
-  <%= f.button :submit, class: 'btn btn-primary btn-space' %>
+<%= simple_form_for @link, remote: true, url: links_path, html: {class: "input-group input-group-lg"} do |f| %>
+  <%= f.input :url, label: false, wrapper: false, input_html: { maxlength: 200, id: 'address', placeholder: "Paste a link to shorten it"} %>
+  <span class="input-group-btn">
+    <%= f.button :submit, class: 'btn btn-primary', id: 'shorten-btn' %>
+  </span>
 <% end %>
-<% if session[:path_key] %>
-  <%= link_to nil, represent_link(session[:path_key]), {id: 'shortened_link'} %>
-<% end %>
+<div id="links">
+  <% if session[:keys] %>
+    <% session[:keys].reverse.each do |key| %>
+      <%= render partial: 'link', locals: {path_key: key} %>
+    <% end %>
+  <% end %>
+</div>

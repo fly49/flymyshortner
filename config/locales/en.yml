@@ -1,4 +1,5 @@
 en:
+  copy-btn: "Copy Link"
   link:
     invalid: "Your link is invalid"
   helpers:

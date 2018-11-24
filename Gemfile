@@ -21,6 +21,9 @@ gem 'jquery-rails'
 gem 'simple_form'
 
 gem 'rubocop', require: false
+gem 'httparty'
+
+gem 'clipboard-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

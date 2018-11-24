@@ -1,3 +1,152 @@
-// Place all the styles related to the links controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.card {
+  background: #fff;
+  text-align: left;
+  font-family: 'Comfortaa', cursive;
+  padding-top: 26px;
+  padding-bottom: 1px;
+  padding-right: 26px;
+  padding-left: 26px;
+}
+.card:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.card:last-child {
+  margin-bottom: 30px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.card-title { 
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.card-subtitle {
+  margin-top: 7px;
+}
+.card-text {
+  margin-top: 20px;
+  padding-bottom: 26px;
+}
+.card:not(:last-of-type) {
+  .card-body {
+    border-bottom: 1px solid #e3e6e7;
+  }
+}
+.simple_form {
+  margin-bottom: 30px;
+}
+.logo_custom {
+  color: #fff;
+  margin-bottom: 20px;
+}
+h1 {
+  font-family: 'K2D', sans-serif;
+}
+.input-group .form-control:not(:first-child):not(:last-child) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.center_div {
+  margin: 200px auto 0 auto;
+  width: 60%;
+}
+/* Background */
+body, html {
+  background-color: rgba(56,142,212,1.00);
+}
+body {
+  text-align: center;
+}
+.form-control:focus, .form-control:hover {
+  border-color: rgba(255,141,0,1.00);
+  color: rgba(255,141,0,1.00);
+}
+input:focus, input:hover {
+  background-color: rgb(252, 244, 244);
+  border: 1px solid;
+}
+
+/* Placeholder */
+input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder {
+  color: rgba(255,141,0,1.00);
+  font-family: 'Comfortaa', cursive;
+}
+input:focus:-moz-placeholder, input:hover:-moz-placeholder {
+  color: rgba(255,141,0,1.00);
+  font-family: 'Comfortaa', cursive;
+}
+input:focus::-moz-placeholder, input:hover::-moz-placeholder {
+  color: rgba(255,141,0,1.00);
+  font-family: 'Comfortaa', cursive;
+}
+input::-webkit-input-placeholder {
+  font-family: 'Comfortaa', cursive;
+}
+input:-moz-placeholder {
+  font-family: 'Comfortaa', cursive;
+}
+input::-moz-placeholder {
+  font-family: 'Comfortaa', cursive;
+}
+.copy-input {
+  position: absolute;
+  left: -10000px;
+}
+
+/* Buttons */
+.input-lg, .input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.btn-primary {
+  background: rgba(255,141,0,1.00);
+  color: #fff;
+  border: 0px solid transparent;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+  background: rgba(255,120,0,1.00);
+  border: 0px solid transparent;
+}
+.btn.btn-primary:active {
+  background: rgba(255,105,0,1.00);
+}
+.btn-sm {
+  float: right;
+  background: white;
+  color: rgba(255,109,0,1.00);
+  font-weight: 600;
+  border: 1px solid rgba(255,141,0,1.00);
+  line-height: normal;
+}
+.btn-sm:hover {
+  background: rgba(255,141,0,1.00);
+  color: white;
+}
+
+/* Text */
+p {
+  margin: 0;
+}
+
+/* Links */
+.link_title {
+  font-size: 12pt;
+  color: black;
+}
+.link_title:hover, .link_title:focus {
+  color: black;
+}
+.original_link {
+  font-size: 10pt;
+  color: rgb(155, 155, 155);
+}
+.original_link:hover, .original_link:focus {
+  color: rgb(155, 155, 155);
+}
+.short_link {
+  font-size: 11pt;
+  color: rgba(255,109,0,1.00);
+}
+.short_link:hover, .short_link:focus {
+  color: rgba(255,141,0,1.00);
+}
