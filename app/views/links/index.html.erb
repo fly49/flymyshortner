@@ -5,8 +5,8 @@
   </span>
 <% end %>
 <div id="links">
-  <% if cookies[:path_keys] %>
-    <% cookies[:path_keys].split(',').reverse.each do |key| %>
+  <% if session[:keys] %>
+    <% byebug; session[:keys].reverse.each do |key| %>
       <%= render partial: 'link', locals: {path_key: key} %>
     <% end %>
   <% end %>

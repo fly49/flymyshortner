@@ -13,8 +13,8 @@ class LinksController < ApplicationController
     if @link.valid?
       @link.save
       @path_key = @link.to_key.first
-      cookies[:path_keys] = "" if cookies[:path_keys].nil?
-      cookies[:path_keys] = cookies[:path_keys] + "#{@path_key},"
+      session[:keys] ||= [] 
+      session[:keys] << @path_key
     else
       flash[:danger] = I18n.t('link.invalid')
     end
