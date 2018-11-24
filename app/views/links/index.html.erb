@@ -6,7 +6,7 @@
 <% end %>
 <div id="links">
   <% if session[:keys] %>
-    <% byebug; session[:keys].reverse.each do |key| %>
+    <% session[:keys].reverse.each do |key| %>
       <%= render partial: 'link', locals: {path_key: key} %>
     <% end %>
   <% end %>

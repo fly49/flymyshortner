@@ -133,20 +133,20 @@ p {
   font-size: 12pt;
   color: black;
 }
-.link_title:hover {
+.link_title:hover, .link_title:focus {
   color: black;
 }
 .original_link {
   font-size: 10pt;
   color: rgb(155, 155, 155);
 }
-.original_link:hover {
+.original_link:hover, .original_link:focus {
   color: rgb(155, 155, 155);
 }
 .short_link {
   font-size: 11pt;
   color: rgba(255,109,0,1.00);
 }
-.short_link:hover {
+.short_link:hover, .short_link:focus {
   color: rgba(255,141,0,1.00);
 }
