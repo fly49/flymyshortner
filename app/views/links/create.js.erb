@@ -1,1 +1,5 @@
-$('#links').prepend("<%= j render partial: 'link', locals: {path_key: @path_key} %>");
+var $link = $("#<%="card_#{@path_key}"%>");
+if($link){
+  $link.fadeOut(1500, function(){ $link.remove(); });
+}
+$("<%= j render partial: 'link', locals: {path_key: @path_key} %>").prependTo('#links').hide().slideDown()
