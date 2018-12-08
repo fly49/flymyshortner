@@ -1,12 +1,12 @@
-<%= simple_form_for @link, remote: true, url: links_path, html: {class: "input-group input-group-lg"} do |f| %>
+<%= simple_form_for @link, remote: true, url: links_path, html: {class: "input-group input-group-lg"}, :method => 'post' do |f| %>
   <%= f.input :url, label: false, wrapper: false, input_html: { maxlength: 200, id: 'address', placeholder: "Paste a link to shorten it"} %>
   <span class="input-group-btn">
     <%= f.button :submit, class: 'btn btn-primary', id: 'shorten-btn' %>
   </span>
 <% end %>
 <div id="links">
-  <% if session[:keys] %>
-    <% session[:keys].reverse.each do |key| %>
+  <% if cookies[:keys] %>
+    <% JSON.parse(cookies[:keys]).reverse.each do |key| %>
       <%= render partial: 'link', locals: {path_key: key} %>
     <% end %>
   <% end %>

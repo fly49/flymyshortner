@@ -11,10 +11,9 @@ class LinksController < ApplicationController
     @link = Link.new
     @link.url = permitted_params.fetch(:url)
     if @link.valid?
-      @link.save
-      @path_key = @link.to_key.first
-      session[:keys] ||= [] 
-      session[:keys] << @path_key
+      keys_arr = @link.process(cookies[:keys])
+      cookies[:keys] = JSON.generate(keys_arr)
+      @path_key = @link.to_key
     else
       flash[:danger] = I18n.t('link.invalid')
     end
