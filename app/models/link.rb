@@ -13,7 +13,7 @@ class Link
   end
   
   def scrap_title
-    GetLinkTitleJob.perform_later(@path_key)
+    GetLinkTitleJob.perform_async(@path_key)
   end
   
   def save_to_redis

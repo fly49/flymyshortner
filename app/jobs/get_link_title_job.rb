@@ -2,6 +2,7 @@
 require 'httparty'
 
 class GetLinkTitleJob < ActiveJob::Base
+  include Sidekiq::Worker
   queue_as :default
 
   def perform(path_key)
