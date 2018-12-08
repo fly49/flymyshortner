@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 require 'httparty'
 
-class GetLinkTitleJob < ActiveJob::Base
-  queue_as :default
+class GetLinkTitleWorker
+  include Sidekiq::Worker
+  sidekiq_options retry: false
 
   def perform(path_key)
     url = Link.get(path_key)
