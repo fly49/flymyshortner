@@ -20,14 +20,14 @@ class Link
     loop do
       @path_key = generate_key
       unless REDIS.exists(@path_key)
-        Redis.current.set(@path_key, Marshal.dump(@url))
+        REDIS.set(@path_key, Marshal.dump(@url))
         break
       end
     end
   end
   
   def persisted?
-    Redis.current.exists(@path_key)
+    REDIS.exists(@path_key)
   end
   
   def to_key
