@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'redis'
 gem 'redis-rails'
+gem "figaro"
 
 gem 'bootstrap-sass'
 gem 'jquery-rails'
