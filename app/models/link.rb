@@ -9,7 +9,7 @@ class Link
   validates :url, presence: true, url: true
   
   def self.get(key)
-    Marshal.load(Redis.current.get(key))
+    Marshal.load(REDIS.get(key))
   end
   
   def scrap_title
@@ -19,7 +19,7 @@ class Link
   def save_to_redis
     loop do
       @path_key = generate_key
-      unless Redis.current.exists(@path_key)
+      unless REDIS.exists(@path_key)
         Redis.current.set(@path_key, Marshal.dump(@url))
         break
       end
