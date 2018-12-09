@@ -24,6 +24,7 @@ class Link
         break
       end
     end
+    scrap_title
   end
   
   def persisted?
@@ -49,7 +50,6 @@ class Link
       keys_arr
     else
       save_to_redis
-      scrap_title
       [@path_key]
     end
   end
