@@ -14,7 +14,7 @@ class LinksController < ApplicationController
       cookies[:keys] = @link.process_cookies(cookies[:keys])
       @path_key = @link.to_key
     else
-      flash[:danger] = I18n.t('link.invalid')
+      flash.now[:danger] = I18n.t('link.invalid')
     end
     
     respond_to do |format|

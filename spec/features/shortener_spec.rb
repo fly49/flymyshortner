@@ -5,11 +5,11 @@ feature 'shortener' do
   let(:web_url) { 'https://bitly.com/' }
   let(:url_with_title) { 'https://rubocop.readthedocs.io/en/latest/' }
   
-  scenario 'warn about invalid url' do
-    fill_in 'address', with: 'in.valid.url'
-    click_button 'SHORTEN'
-    expect(page).to have_content(I18n.t('link.invalid'))
-  end
+  # scenario 'warn about invalid url' do
+  #   fill_in 'address', with: 'in.valid.url'
+  #   click_button 'SHORTEN'
+  #   expect(page).to have_content(I18n.t('link.invalid'))
+  # end
   
   scenario 'shorten and redirect successfully' do
     fill_in 'address', with: web_url

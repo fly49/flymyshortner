@@ -13,11 +13,6 @@
 
   <body>
     <div class="container">
-      <!-- Messages -->
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-      <% end %>
-      
       <div class="center_div">
         <div class="logo_custom">
           <%= image_tag "link-256.png", size: "150x150", alt: "Link" %>
@@ -25,7 +20,6 @@
         </div>
         <%= yield %>
       </div>
-      
     </div>
   </body>
 </html>

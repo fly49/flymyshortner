@@ -38,7 +38,7 @@ class Link
   def process_cookies(cookies)
     keys_arr = cookies ? JSON.parse(cookies) : []
     @path_key = select_existed(keys_arr) || save_under_key
-    keys_arr << @path_key
+    keys_arr << @path_key unless select_existed(keys_arr)
     JSON.generate(keys_arr)
   end
   
