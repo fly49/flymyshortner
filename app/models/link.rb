@@ -23,7 +23,6 @@ class Link
         break
       end
     end
-    scrap_title
     key
   end
   
@@ -38,7 +37,10 @@ class Link
   def process_cookies(cookies)
     keys_arr = cookies ? JSON.parse(cookies) : []
     @path_key = select_existed(keys_arr) || save_under_key
-    keys_arr << @path_key unless select_existed(keys_arr)
+    unless select_existed(keys_arr)
+      keys_arr << @path_key 
+      scrap_title
+    end
     JSON.generate(keys_arr)
   end
   
