@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Link
   SHORT_LINK_LETTERS = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten.freeze
   include ActiveModel::Validations
@@ -16,15 +14,16 @@ class Link
     GetLinkTitleWorker.perform_async(@path_key)
   end
   
-  def save_to_redis
+  def save_under_key
+    key = nil
     loop do
-      @path_key = generate_key
-      unless REDIS.exists(@path_key)
-        REDIS.set(@path_key, Marshal.dump(@url))
+      key = generate_key
+      unless REDIS.exists(key)
+        REDIS.set(key, Marshal.dump(@url))
         break
       end
     end
-    scrap_title
+    key
   end
   
   def persisted?
@@ -35,23 +34,22 @@ class Link
     @path_key ? @path_key : nil
   end
   
-  def process(cookie)
-    if cookie
-      keys_arr = JSON.parse(cookie)
-      url_arr = keys_arr.map{ |key| Link.get(key) }
-      url_with_index = url_arr.each_with_index
-                              .select{ |url, i| (url == @url) || url.first == @url }
-      if url_with_index.present?
-        @path_key = keys_arr[url_with_index[0][1]]
-      else
-        save_to_redis
-        keys_arr << @path_key
-      end
-      keys_arr
-    else
-      save_to_redis
-      [@path_key]
+  def process_cookies(cookies)
+    keys_arr = cookies ? JSON.parse(cookies) : []
+    @path_key = select_existed(keys_arr) || save_under_key
+    unless select_existed(keys_arr)
+      keys_arr << @path_key 
+      scrap_title
     end
+    JSON.generate(keys_arr)
+  end
+  
+  def select_existed(keys_arr)
+    return unless keys_arr.present?
+    indexed_url = keys_arr.map{ |key| Link.get(key) }
+                           .each_with_index
+                           .select{ |url, i| (url == @url) || url.first == @url }
+    keys_arr[indexed_url[0][1]] if indexed_url.present?
   end
   
   private

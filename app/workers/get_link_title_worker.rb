@@ -13,7 +13,7 @@ class GetLinkTitleWorker
     title = page_conent.scan(/<title>\s*(.+)<\/title>$/).flatten.first
     if title
       url_title = CGI::unescapeHTML(title)
-      Redis.current.set(path_key, Marshal.dump([url,url_title]))
+      REDIS.set(path_key, Marshal.dump([url,url_title]))
     end
   end
 end

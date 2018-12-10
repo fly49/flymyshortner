@@ -1,23 +1,24 @@
 language: ruby
 rvm:
-  - 2.4.4
-  before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  script:
-  - bundle exec rspec
-  after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- 2.4.4
+before_script:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
+script:
+- bundle exec rspec
+after_script:
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 env:
   global:
   - CC_TEST_REPORTER_ID: 85add2e883b5f810b6f6302e7e129665d580b71eb27ecad6ae7b7aa2644f1ec7
 services:
-  - redis-server
+- redis-server
 deploy:
   provider: heroku
   app: flymyshortner
   api_key:
-    secure: xfkDbgbsIeOZyZ4HnfS5XJPCowIoWx2hKMpqAfV0sE5tRZiUKr1cGNyHqQ5oJFY7Ipx16XSVuw3XYytV/JuDSvdGevEynzG8KjYMtEV3oE6ZR34XfIu64mPV7bHhw81+46C1YhJEboZXMpSXXw/KHUfVbLnPycvfVwAvSmFPPn+1HuVd1Yip2+kByRGEbcSIB7tYwiAsbCaPyQGBCOJVu8h+gDV8S8JNAmY/xJqBxU064girPn03vNd+IeWoNqXvXF01hYrZD6XnbJWgiThXGJECN3vpSvokPB+hv2Gpf4FlOOqarUyLN+iUJ6XqAeAvqAn/ym4s3mjx0cn7hywsdTlmITVmtCLgPimyGFBupyomES/2tncGLFr4Mzd1S4Ecw+h06Kud0e49G25uF/pylbLDN+fHtxHvwBDAqks0FUUNyEnKYY/Dm9ahQ7zVR6RCamwAaEj6PwRYpn72h+4Abygj0yVSFnhMmiggpIL/k2pmGODnOzUUmvx2rENvUnym5J90XQ6/pe1h0trsqZ20ambINuA9OtviSU3grFs91VxtQToJoeysxCh//uBwDyoGnCQ6fWQKnEF4FIOPKL8uvcx5h+uKfZ77zY2/Id31pmaBYi81l12UdahGsqQ26jpixE+W7tmKiNaCK/UpTEISHO2/kUEZc1cElUWypbSWwfA=
+    secure: fIJXZZM3UusaauRC2xCSmHjfD23bmy/S2s0HTimu0CqyCWZbUFDm/6Ym7i/cL59KjBgpv7qgRBoQASjmFTA2/hUJhLb7H+0O6xI8+9XP6i9BDCm9oAqWtFBDxJXtq1vsL1PJJPObNzSF1xsQzzbRhZg1i1vBXAT5+O5VIh6Cu6smOviBbYGQYIAEzFHk6Hpbfj7XSnz3aA8zNifcmpF5LvNddTbG6bhwfRddzNIkO6efV5SdwvYajLb3zuSJF3S3DI54ywehhYfbv8b89eF3bCWA5DVar3+pa/OwryoSCYC9PVVDFBlbXYXM4i6UT6mGXNKaW/D4uY+kG+WsOBVjvjjk7c4P2VOEI0xIaJ57PHBVcy8eMdeDosiW/e8L6NWQ/WR0oUj+bNfBycDR1eYvc1122Ab/7xzDl0BjLOCdfqVuihJ1zMLNqwBbAzK+DoYqJe6YKF458003XRMZ19xoePi+Z0J/W39lGFULAy2tLDWnzQ97FxoIwZaxmBZNQaEa5s9EJzdh+UF3IRdVofkB/nYAwPWO+BS6r+7ABwjeDYZfWrX2uc2wdTZF1i8pxMiSiPESff3e/OgETxLcRxiVagRQVBWfD5UTNNrp81mK8XeA/oyRg2PHXXcO7YhEtxuRGndRphRVVAyvbKjzNaxGKfOKZSMXXW0EQqbUowulazg=
   on:
     all_branches: true

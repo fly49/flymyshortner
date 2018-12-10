@@ -1,5 +1,8 @@
+$("#form")[0].reset()
 var $link = $("#<%="card_#{@path_key}"%>");
 if($link){
   $link.fadeOut(1500, function(){ $link.remove(); });
 }
-$("<%= j render partial: 'link', locals: {path_key: @path_key} %>").prependTo('#links').hide().slideDown()
+$("<%= j render partial: 'link', locals: {path_key: @path_key} %>").prependTo('#links').hide().slideDown();
+var $flash = $("<%= j render partial: 'flash' %>")
+$flash.prependTo('body').fadeOut(4000, "swing", function(){ $flash.remove(); });
