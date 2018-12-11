@@ -1,24 +1,14 @@
-# README
+# Flymyshortner
+[![Build Status](https://travis-ci.org/fly49/flymyshortner.svg?branch=master)](https://travis-ci.org/fly49/flymyshortner)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Flymyshortner is URL-shortner application built using Redis and Sidekiq. Here are some of the key features:
 
-Things you may want to cover:
+* __Shortening__. App shortens your link into 8-lettered string.
 
-* Ruby version
+* __Validation__. App validates your link and show up fancy message if it's now valid.
 
-* System dependencies
+* __Title scraping__. When link is getting processed the sidekiq worker starts to scrap your link's title. If you refresh the page (or come back to page after being absent for a while) you will see that the link's title is scrapped.
 
-* Configuration
+* __Doesn't make duplicates__. App stores shortened links in cookie files and don't make duplicates if you try to shorten same link twice.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Link to deployed app](https://flymyshortner.herokuapp.com/)
