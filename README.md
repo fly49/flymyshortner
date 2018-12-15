@@ -1,6 +1,7 @@
 # Flymyshortner
 [![Build Status](https://travis-ci.org/fly49/flymyshortner.svg?branch=master)](https://travis-ci.org/fly49/flymyshortner)
 [![Maintainability](https://api.codeclimate.com/v1/badges/523e76279e5a0cb4976b/maintainability)](https://codeclimate.com/github/fly49/flymyshortner/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/523e76279e5a0cb4976b/test_coverage)](https://codeclimate.com/github/fly49/flymyshortner/test_coverage)
 
 Flymyshortner is URL-shortner application built using Redis and Sidekiq. Here are some of the key features:
 
